@@ -1,9 +1,6 @@
 import headerImg from '../../assets/img/blog-header.jpg'
-import blog1 from '../../assets/img/blog/blog-1.jpg';
-import blog2 from '../../assets/img/blog/blog-2.jpg';
-import blog3 from "../../assets/img/blog/blog-3.jpg";
 import { useState } from 'react';
-import Information from './info-json';
+// import Information from './info-json';
 import BlogInformation from './blog-info-json';
 
 const Blog = () => {
