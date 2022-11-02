@@ -8,7 +8,7 @@ const Blog = () => {
 
   const blogHandler = (e) => {
     e.preventDefault();
-    const search = document.getElementById("search");
+    const search = document.getElementById("#search");
     console.log(search);
     setSearchTerm(search)
   }
@@ -156,7 +156,7 @@ const Blog = () => {
                       }
                       <button
                         type="button"
-                        // onClick={blogHandler()}
+                        onSubmit={blogHandler}
                       >
                         <i className="bi bi-search"></i>
                       </button>
@@ -329,7 +329,7 @@ const Blog = () => {
                       </li>
                     </ul>
                   </div>
-                  {/* <!-- End sidebar tags--> */}
+                  {/* <!-- End sidebar tags-->. */}
                 </div>
                 {/* <!-- End Blog Sidebar --> */}
               </div>
