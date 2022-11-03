@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 // import Information from './info-json';
 import BlogInformation from './blog-info-json';
 import Posts from './Post';
+import Pagination from './Pagination';
 
 const Blog = () => {
   const [searchTerm, setSearchTerm] = useState("")
@@ -101,7 +102,12 @@ const Blog = () => {
                 {/* 페이지네이션 하는 부분 */}
                 <div className="blog-pagination">
                   <ul className="justify-content-center">
-                    <li>
+                  <Pagination
+                    postsPerPage={postsPerPage}
+                    totalPosts={posts.length}
+                    paginate={setCurrentPage}
+                  ></Pagination>
+                    {/* <li>
                       <a href="!#">1</a>
                     </li>
                     <li className="active">
@@ -109,7 +115,7 @@ const Blog = () => {
                     </li>
                     <li>
                       <a href="!#">3</a>
-                    </li>
+                    </li> */}
                   </ul>
                 </div>
                 {/* <!-- End blog pagination --> */}
