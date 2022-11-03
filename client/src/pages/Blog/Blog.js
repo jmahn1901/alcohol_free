@@ -1,17 +1,49 @@
 import headerImg from '../../assets/img/blog-header.jpg'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 // import Information from './info-json';
 import BlogInformation from './blog-info-json';
+import Posts from './Post';
 
 const Blog = () => {
   const [searchTerm, setSearchTerm] = useState("")
+  const [posts, setPosts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(5);
+  const tmp = [];
 
-  const blogHandler = (e) => {
-    e.preventDefault();
-    const search = document.getElementById("#search");
-    console.log(search);
-    setSearchTerm(search)
-  }
+  // const blogHandler = (e) => {
+  //   e.preventDefault();
+  //   const search = document.getElementById("#search");
+  //   console.log(search);
+  //   setSearchTerm(search)
+  // }
+
+  useEffect(() =>
+  {
+    BlogInformation.filter((val) => {
+    if (searchTerm === "") {
+      return val;
+    } else if (val.name.toLowerCase().includes(searchTerm.toLowerCase())) {
+      return val;
+    }
+    }).map((val, key) => {
+      return (
+        tmp.push(val)
+      );
+    })
+    // console.log(tmp)
+    setPosts(tmp);
+    console.log(posts)
+  }, [])
+
+  /* 새로 추가한 부분 */
+  const indexOfLast = currentPage * postsPerPage;
+  const indexOfFirst = indexOfLast - postsPerPage;
+  const currentPosts = (searchTerm) => {
+    let currentPosts = 0;
+    currentPosts = searchTerm.slice(indexOfFirst, indexOfLast);
+    return currentPosts;
+  };
 
   return (
     <>
@@ -44,73 +76,29 @@ const Blog = () => {
               >
                 <div className="row gy-5 posts-list">
                   {/* 게시글 하나하나가 start 지점 */}
-                  {BlogInformation.filter((val) => {
+                  {/* {BlogInformation.filter((val) => {
                         console.log(val);
-                        if (searchTerm === "") {
+                      if (searchTerm === "") {
+                          setPosts(val);
                           return val
-                        } else if (val.name.toLowerCase().includes(searchTerm.toLowerCase())) {
+                      } else if (val.name.toLowerCase().includes(searchTerm.toLowerCase())) {
+                          setPosts(val);
                           return val
                         }
                       })
                         .map((val, key) => {
-                        return (
-                          <div className="col-lg-6">
-                          <article className="d-flex flex-column">
-                            <div className="post-img">
-                              <img
-                                src={val.img}
-                                alt=""
-                                className="img-fluid"
-                              />
-                            </div>
-      
-                            <h2 className="title">
-                              <a href="blog-details.html">
-                                {val.title}
-                              </a>
-                            </h2>
-      
-                            <div className="meta-top">
-                              <ul>
-                                <li className="d-flex align-items-center">
-                                  <i className="bi bi-person"></i>{" "}
-                                    <a href="blog-details.html">{val.name}</a>
-                                </li>
-                                <li className="d-flex align-items-center">
-                                  <i className="bi bi-clock"></i>{" "}
-                                  <a href="blog-details.html">
-                                      <time dateTime="2022-01-01">{val.time}</time>
-                                  </a>
-                                </li>
-                                <li className="d-flex align-items-center">
-                                  <i className="bi bi-chat-dots"></i>{" "}
-                                    <a href="blog-details.html">{ val.comments }</a>
-                                </li>
-                              </ul>
-                            </div>
-      
-                            <div className="content">
-                              <p>
-                                {val.content}
-                              </p>
-                            </div>
-      
-                            <div className="read-more mt-auto align-self-end">
-                              <a href="blog-details.html">
-                                Read More <i className="bi bi-arrow-right"></i>
-                              </a>
-                            </div>
-                          </article>
-                        </div>
-                        // {/* <!-- End post list item --> */}
-                        );
+                          return (
+                          
+                          <Posts val={currentPosts(posts)} />
+                          );
                         })
-                  }
-                 
-
+                  } */}
+                {console.log(posts)}
+                <Posts posts={currentPosts(posts)} />
                 </div>
                 {/* <!-- End blog posts list --> */}
-
+                
+                {/* 페이지네이션 하는 부분 */}
                 <div className="blog-pagination">
                   <ul className="justify-content-center">
                     <li>
@@ -139,7 +127,7 @@ const Blog = () => {
                     <form action="" className="mt-3">
                       <input type="text" id="search" onChange={e => {setSearchTerm(e.target.value)}} />
                       {BlogInformation.filter((val) => {
-                        console.log(val);
+                        // console.log(val);
                         if (searchTerm === "") {
                           return ""
                         } else if (val.name.toLowerCase().includes(searchTerm.toLowerCase())) {
@@ -156,7 +144,7 @@ const Blog = () => {
                       }
                       <button
                         type="button"
-                        onSubmit={blogHandler}
+                        // onSubmit={blogHandler}
                       >
                         <i className="bi bi-search"></i>
                       </button>
