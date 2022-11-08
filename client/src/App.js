@@ -6,6 +6,9 @@ import Header from './Header';
 import Footer from './Footer'
 import ItemList from './pages/item/ItemList';
 import ItemList2 from './pages/item/ItemList2';
+import BlogDetail from './pages/Blog/BlogDetail';
+import BlogInformation from './pages/Blog/blog-info-json';
+
 
 function App() {
   return (
@@ -14,6 +17,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/blog" element={<Blog />} />
+      <Route path="/blog/:id" element={<BlogDetail />} />
       <Route path="/item" element={<ItemList2/>}/>
     </Routes>
     <Footer/>

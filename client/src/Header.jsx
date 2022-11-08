@@ -21,7 +21,7 @@ let Header = () => {
                             <li><a href="services.html">Services</a></li>
                             <li><a href="portfolio.html">Portfolio</a></li>
                             <li><a href="team.html">Team</a></li>
-                            <li><a href="blog">Blog</a></li>
+                            <li><a href="/blog">Blog</a></li>
                             <li className="dropdown"><a href="#"><span>Dropdown</span> <i className="bi bi-chevron-down dropdown-indicator"></i></a>
                                 <ul>
                                     <li><a href="#">Dropdown 1</a></li>

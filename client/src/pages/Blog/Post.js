@@ -1,7 +1,8 @@
 import React from "react";
+import { Link } from 'react-router-dom';
+
 
 const Posts = ({ posts }) => {
-    console.log(posts)
   return (
       <>
           {posts.map((post) => (
@@ -39,9 +40,9 @@ const Posts = ({ posts }) => {
                 </div>
       
                 <div className="read-more mt-auto align-self-end">
-                  <a href="blog-details.html">
+                  <Link to={`/blog/${post.id}`}>
                     Read More <i className="bi bi-arrow-right"></i>
-                  </a>
+                  </Link>
                 </div>
               </article>
             </div>

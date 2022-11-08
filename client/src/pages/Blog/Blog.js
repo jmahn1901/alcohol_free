@@ -1,6 +1,5 @@
 import headerImg from '../../assets/img/blog-header.jpg'
 import { useState, useEffect } from 'react';
-// import Information from './info-json';
 import BlogInformation from './blog-info-json';
 import Posts from './Post';
 import Pagination from './Pagination';
@@ -9,7 +8,7 @@ const Blog = () => {
   const [searchTerm, setSearchTerm] = useState("")
   const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(5);
+  const [postsPerPage, setPostsPerPage] = useState(6);
   const tmp = [];
 
   // const blogHandler = (e) => {
@@ -32,17 +31,16 @@ const Blog = () => {
         tmp.push(val)
       );
     })
-    // console.log(tmp)
     setPosts(tmp);
     console.log(posts)
-  }, [])
+  }, [searchTerm])
 
-  /* 새로 추가한 부분 */
+  /* 새로 추가한 부분 - 페이지네이션 목록 길이 계산 */
   const indexOfLast = currentPage * postsPerPage;
   const indexOfFirst = indexOfLast - postsPerPage;
-  const currentPosts = (searchTerm) => {
+  const currentPosts = (posts) => {
     let currentPosts = 0;
-    currentPosts = searchTerm.slice(indexOfFirst, indexOfLast);
+    currentPosts = posts.slice(indexOfFirst, indexOfLast);
     return currentPosts;
   };
 
@@ -76,25 +74,8 @@ const Blog = () => {
                 data-aos-delay="200"
               >
                 <div className="row gy-5 posts-list">
-                  {/* 게시글 하나하나가 start 지점 */}
-                  {/* {BlogInformation.filter((val) => {
-                        console.log(val);
-                      if (searchTerm === "") {
-                          setPosts(val);
-                          return val
-                      } else if (val.name.toLowerCase().includes(searchTerm.toLowerCase())) {
-                          setPosts(val);
-                          return val
-                        }
-                      })
-                        .map((val, key) => {
-                          return (
-                          
-                          <Posts val={currentPosts(posts)} />
-                          );
-                        })
-                  } */}
-                {console.log(posts)}
+                {/* 게시글 하나하나가 start 지점 */}
+                {/* {console.log(posts)} */}
                 <Posts posts={currentPosts(posts)} />
                 </div>
                 {/* <!-- End blog posts list --> */}
@@ -107,15 +88,6 @@ const Blog = () => {
                     totalPosts={posts.length}
                     paginate={setCurrentPage}
                   ></Pagination>
-                    {/* <li>
-                      <a href="!#">1</a>
-                    </li>
-                    <li className="active">
-                      <a href="!#">2</a>
-                    </li>
-                    <li>
-                      <a href="!#">3</a>
-                    </li> */}
                   </ul>
                 </div>
                 {/* <!-- End blog pagination --> */}
